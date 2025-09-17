@@ -1,4 +1,9 @@
-const message = 'Hello 111';
-const message1 = 'Hello 111';
+import { initMongoDB } from './db/initMongoDB.js';
+import { startServer } from './server.js';
 
-console.log(message);
+const bootstrap = async () => {
+  await initMongoDB();
+  startServer();
+};
+
+bootstrap();
