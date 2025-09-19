@@ -1,26 +1,24 @@
-import { listTasks, createTask, findTask, saveTask } from '../utils/tasksStore.js';
+import { Task } from '../models/task.model.js';
 
-export async function getTasksService(userId) {
-  return listTasks(userId);
+export async function getTasksService() {
+  return Task.find({}).sort({ date: 1 }).lean();
 }
 
-export async function createTaskService(userId, payload) {
-  const name = String(payload?.name ?? '').trim();
-  const date = String(payload?.date ?? '');
-  const isDone = Boolean(payload?.isDone);
-  if (!name || !date) {
-    return { error: 'name and date are required', status: 400 };
-  }
-
-  const task = createTask(userId, { name, date, isDone });
-  return { task };
+export async function createTaskService(payload) {
+  const doc = await Task.create({
+    name: String(payload?.name ?? '').trim(),
+    date: String(payload?.date ?? ''),
+    isDone: Boolean(payload?.isDone),
+  });
+  return { task: doc.toObject() };
 }
 
-export async function toggleTaskStatusService(userId, taskId) {
-  const task = findTask(userId, taskId);
-  if (!task) return { error: 'Task not found', status: 404 };
+export async function toggleTaskStatusService(taskId) {
+  const doc = await Task.findById(taskId);
+  if (!doc) return { error: 'Task not found', status: 404 };
 
-  task.isDone = !task.isDone;
-  saveTask(userId, task);
-  return { task };
+  doc.isDone = !doc.isDone;
+  await doc.save();
+
+  return { task: doc.toObject() };
 }
