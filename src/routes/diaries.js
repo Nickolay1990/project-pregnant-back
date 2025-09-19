@@ -1,8 +1,14 @@
 import { Router } from 'express';
+import { validateBody } from '../middlewares/validateBody.js';
+import { createDiarySchema, updateDiarySchema } from '../validation/diaries.js';
+import { createDiaryController, deleteDiaryController, getDiariesController, updateDiaryController } from '../controllers/diaries.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 export const diariesRouter = Router();
 
-// diariesRouter.post('/');
-// diariesRouter.get('/');
-// diariesRouter.patch('/:diariesId');
-// diariesRouter.delete('/:diariesId');
+diariesRouter.use(authenticate);
+
+diariesRouter.post('/', validateBody(createDiarySchema), createDiaryController);
+diariesRouter.get('/',getDiariesController);
+diariesRouter.patch('/:diaryId', validateBody(updateDiarySchema), updateDiaryController);
+diariesRouter.delete('/:diaryId', deleteDiaryController);
