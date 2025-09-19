@@ -4,10 +4,7 @@ export const registerUserSchema = Joi.object({
   name: Joi.string().min(3).max(32).required(),
   email: Joi.string().max(64).email().required(),
   password: Joi.string().min(8).max(128).required(),
-  gender: Joi.string()
-    .valid('boy', 'girl', 'I don`t know yet')
-    .default('I don`t know yet')
-    .required(),
+  gender: Joi.string().valid('boy', 'girl', 'I don`t know yet').required(),
   dueDate: Joi.string()
     .required()
     .custom((value, helpers) => {

@@ -8,11 +8,13 @@ import {
   registerUserController,
 } from '../controllers/auth.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { upload } from '../middlewares/multer.js';
 
 const authRouter = Router();
 
 authRouter.post(
   '/register',
+  upload.single('photo'),
   validateBody(registerUserSchema),
   registerUserController,
 );

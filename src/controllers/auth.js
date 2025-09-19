@@ -1,25 +1,37 @@
-import { SETUP_SESSION } from '../constants/index.js';
 import {
   loginUser,
   logoutUser,
   refreshTokenSession,
   registerUser,
 } from '../services/auth.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
+import { setupSession } from '../utils/setupSession.js';
 
 export const registerUserController = async (req, res) => {
-  const user = await registerUser(req.body);
+  const photo = req.file;
+
+  let photoUrl = null;
+
+  if (photo) {
+    photoUrl = await saveFileToCloudinary(photo);
+  }
+
+  const result = await registerUser({
+    ...req.body,
+    photo: photoUrl,
+  });
 
   res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
-    data: user,
+    data: result,
   });
 };
 
 export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
 
-  SETUP_SESSION(res, session);
+  setupSession(res, session);
 
   res.json({
     status: 200,
@@ -36,7 +48,7 @@ export const refreshUserSessionController = async (req, res) => {
     refreshToken: req.cookies.refreshToken,
   });
 
-  SETUP_SESSION(res, session);
+  setupSession(res, session);
 
   res.json({
     status: 200,
