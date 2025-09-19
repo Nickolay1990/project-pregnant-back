@@ -1,44 +1,41 @@
 const USERS = new Map();
 let NEXT_ID = 1;
 
+function getBox(userId) {
+  if (!USERS.has(userId)) USERS.set(userId, []);
+  return USERS.get(userId);
+}
+
 export function listTasks(userId) {
-  const box = USERS.get(userId);
-  if (!box) return [];
-  return Array.from(box.values()).sort((a, b) => {
-    if (a.date === b.date) return a.createdAt - b.createdAt;
-    return a.date.localeCompare(b.date);
-  });
+  const box = getBox(userId);
+  return [...box].sort((a, b) => a.date.localeCompare(b.date));
 }
 
 export function createTask(userId, data) {
-  const box = USERS.get(userId) || new Map();
-  if (!USERS.has(userId)) USERS.set(userId, box);
-
-  const id = String(NEXT_ID++);
-  const now = Date.now();
+  const box = getBox(userId);
   const task = {
-    id,
-    name: data.name.trim(),
+    id: String(NEXT_ID++),
+    name: String(data.name || '').trim(),
     date: data.date,
-    isDone: Boolean(data.isDone ?? false),
+    isDone: Boolean(data.isDone),
     userId,
-    createdAt: now,
-    updatedAt: now,
   };
-  box.set(id, task);
+  box.push(task);
   return task;
 }
 
 export function findTask(userId, taskId) {
-  const box = USERS.get(userId);
-  if (!box) return null;
-  return box.get(taskId) || null;
+  const box = getBox(userId);
+  return box.find(t => t.id === String(taskId)) || null;
 }
 
 export function saveTask(userId, task) {
-  const box = USERS.get(userId) || new Map();
-  if (!USERS.has(userId)) USERS.set(userId, box);
-  task.updatedAt = Date.now();
-  box.set(task.id, task);
+  const box = getBox(userId);
+  const i = box.findIndex(t => t.id === String(task.id));
+  if (i === -1) {
+    box.push(task);
+  } else {
+    box[i] = task;
+  }
   return task;
 }
