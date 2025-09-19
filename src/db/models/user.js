@@ -19,7 +19,6 @@ const usersSchema = new Schema(
       type: String,
       enum: ['boy', 'girl', 'I don`t know yet'],
       default: 'I don`t know yet',
-      required: true,
     },
     dueDate: {
       type: String,
@@ -46,7 +45,6 @@ const usersSchema = new Schema(
         message:
           'dueDate must be in YYYY-MM-DD format and be between 1 and 40 weeks from the current date.',
       },
-      required: true,
     },
     photo: {
       type: String,

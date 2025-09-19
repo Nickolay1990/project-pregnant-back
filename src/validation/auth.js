@@ -4,9 +4,8 @@ export const registerUserSchema = Joi.object({
   name: Joi.string().min(3).max(32).required(),
   email: Joi.string().max(64).email().required(),
   password: Joi.string().min(8).max(128).required(),
-  gender: Joi.string().valid('boy', 'girl', 'I don`t know yet').required(),
+  gender: Joi.string().valid('boy', 'girl', 'I don`t know yet'),
   dueDate: Joi.string()
-    .required()
     .custom((value, helpers) => {
       const regex = /^\d{4}-\d{2}-\d{2}$/;
       if (!regex.test(value)) {
