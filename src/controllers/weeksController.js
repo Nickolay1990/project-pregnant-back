@@ -1,4 +1,5 @@
 // src/controllers/weeksController.js
+import { validateWeekParam } from '../middlewares/validateWeekParam.js';
 import {
   getWeekDashboardService,
   getBabyDevelopmentService,
@@ -6,35 +7,22 @@ import {
 } from '../services/weekService.js';
 
 // Дашборд
-export const getWeekDashboardController = async (req, res, next) => {
-  try {
-    const weekNumber = Number(req.params.week);
-    const user = req.user; // після JWT авторизації
-    const data = await getWeekDashboardService(weekNumber, user);
-    res.json(data);
-  } catch (err) {
-    next(err);
-  }
+export const getWeekDashboardController = async (req, res) => {
+  const weekNumber = validateWeekParam(req.params.week);
+  const data = await getWeekDashboardService(weekNumber, req.user);
+  res.status(200).json(data);
 };
 
 // Малюк
-export const getBabyDevelopmentController = async (req, res, next) => {
-  try {
-    const weekNumber = Number(req.params.week);
-    const data = await getBabyDevelopmentService(weekNumber);
-    res.json(data);
-  } catch (err) {
-    next(err);
-  }
+export const getBabyDevelopmentController = async (req, res) => {
+  const weekNumber = validateWeekParam(req.params.week);
+  const data = await getBabyDevelopmentService(weekNumber);
+  res.status(200).json(data);
 };
 
 // Мама
-export const getMomBodyController = async (req, res, next) => {
-  try {
-    const weekNumber = Number(req.params.week);
-    const data = await getMomBodyService(weekNumber);
-    res.json(data);
-  } catch (err) {
-    next(err);
-  }
+export const getMomBodyController = async (req, res) => {
+  const weekNumber = validateWeekParam(req.params.week);
+  const data = await getMomBodyService(weekNumber);
+  res.status(200).json(data);
 };
