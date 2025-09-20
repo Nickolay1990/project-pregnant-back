@@ -2,7 +2,7 @@ import createHttpError from 'http-errors';
 import { UsersCollection } from '../db/models/user.js';
 import bcrypt from 'bcrypt';
 import { SessionsCollection } from '../db/models/session.js';
-import { CREATE_SESSION } from '../constants/index.js';
+import { createSession } from '../utils/createSession.js';
 
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
@@ -31,7 +31,7 @@ export const loginUser = async (payload) => {
 
   await SessionsCollection.deleteOne({ userId: user._id });
 
-  const newSession = CREATE_SESSION();
+  const newSession = createSession();
 
   return await SessionsCollection.create({
     userId: user._id,
@@ -54,7 +54,7 @@ export const refreshTokenSession = async ({ sessionId, refreshToken }) => {
     throw createHttpError(401, 'Session token expired');
   }
 
-  const newSession = CREATE_SESSION();
+  const newSession = createSession();
 
   await SessionsCollection.deleteOne({ _id: sessionId, refreshToken });
 
