@@ -7,6 +7,7 @@ import {
   getMomBodyController,
   getPublicDashboardController,
 } from '../controllers/weeksController.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 export const weekRouter = Router();
 
@@ -14,6 +15,11 @@ export const weekRouter = Router();
 weekRouter.get('/public/dashboard', getPublicDashboardController);
 
 // ПРИВАТНІ
-weekRouter.get('/:week/dashboard', getWeekDashboardController);
+
+weekRouter.use(authenticate);
+
+weekRouter.get('/dashboard', getWeekDashboardController);
 weekRouter.get('/:week/baby', getBabyDevelopmentController);
+weekRouter.get('/baby', getBabyDevelopmentController);
 weekRouter.get('/:week/mom', getMomBodyController);
+weekRouter.get('/mom', getMomBodyController);
