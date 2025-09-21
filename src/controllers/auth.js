@@ -1,10 +1,10 @@
-import { SETUP_SESSION } from '../constants/index.js';
 import {
   loginUser,
   logoutUser,
   refreshTokenSession,
   registerUser,
 } from '../services/auth.js';
+import { setupSession } from '../utils/setupSession.js';
 
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
@@ -19,7 +19,7 @@ export const registerUserController = async (req, res) => {
 export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
 
-  SETUP_SESSION(res, session);
+  setupSession(res, session);
 
   res.json({
     status: 200,
@@ -36,7 +36,7 @@ export const refreshUserSessionController = async (req, res) => {
     refreshToken: req.cookies.refreshToken,
   });
 
-  SETUP_SESSION(res, session);
+  setupSession(res, session);
 
   res.json({
     status: 200,
