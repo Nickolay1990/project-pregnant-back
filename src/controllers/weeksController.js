@@ -6,6 +6,7 @@ import {
   getMomBodyService,
   calculatePregnancyInfoPublic,
 } from '../services/weekService.js';
+import { calculateCurrentWeekFromUser } from '../utils/calculatePregnancy.js';
 
 // 1. ПУБЛІЧНИЙ дашборд
 export const getPublicDashboardController = async (req, res) => {
@@ -21,21 +22,25 @@ export const getPublicDashboardController = async (req, res) => {
 
 // 2. Приватний дашборд
 export const getWeekDashboardController = async (req, res) => {
-  const weekNumber = validateWeekParam(req.params.week);
+  const weekNumber = calculateCurrentWeekFromUser(req.user);
   const data = await getWeekDashboardService(weekNumber, req.user);
   res.status(200).json(data);
 };
 
 // Малюк
 export const getBabyDevelopmentController = async (req, res) => {
-  const weekNumber = validateWeekParam(req.params.week);
+  const weekNumber = req.params.week
+    ? validateWeekParam(req.params.week)
+    : calculateCurrentWeekFromUser(req.user);
   const data = await getBabyDevelopmentService(weekNumber);
   res.status(200).json(data);
 };
 
 // Мама
 export const getMomBodyController = async (req, res) => {
-  const weekNumber = validateWeekParam(req.params.week);
+  const weekNumber = req.params.week
+    ? validateWeekParam(req.params.week)
+    : calculateCurrentWeekFromUser(req.user);
   const data = await getMomBodyService(weekNumber);
   res.status(200).json(data);
 };
