@@ -4,6 +4,14 @@ import { MomState } from '../db/models/MomState.js';
 import createHttpError from 'http-errors';
 
 // Дашборд
+// Публічний
+export const calculatePregnancyInfoPublic = () => {
+  const weekNumber = 1;
+  const daysLeft = (42 - weekNumber) * 7;
+  return { weekNumber, daysLeft };
+};
+
+//Приватний
 export const getWeekDashboardService = async (weekNumber, user) => {
   const baby = await BabyState.findOne({ weekNumber });
   const mom = await MomState.findOne({ weekNumber });

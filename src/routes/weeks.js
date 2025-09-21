@@ -5,11 +5,15 @@ import {
   getWeekDashboardController,
   getBabyDevelopmentController,
   getMomBodyController,
+  getPublicDashboardController,
 } from '../controllers/weeksController.js';
 
 export const weekRouter = Router();
 
-weekRouter.get('/:week/dashboard', getWeekDashboardController); // публічний
-weekRouter.get('/:week/dashboard', getWeekDashboardController); // приватний
+// ПУБЛІЧНИЙ (неавторизований)
+weekRouter.get('/public/dashboard', getPublicDashboardController);
+
+// ПРИВАТНІ
+weekRouter.get('/:week/dashboard', getWeekDashboardController);
 weekRouter.get('/:week/baby', getBabyDevelopmentController);
 weekRouter.get('/:week/mom', getMomBodyController);
