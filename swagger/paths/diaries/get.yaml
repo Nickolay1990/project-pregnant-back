@@ -1,0 +1,29 @@
+tags:
+  - Diaries
+summary: Get all diary entries
+operationId: getDiaries
+description: Retrieve all diary entries for the authenticated user
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Diaries retrieved successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Diaries retrieved successfully
+            data:
+              type: array
+              items:
+                $ref: '../../components/schemas/diary.yaml'

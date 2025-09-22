@@ -1,0 +1,8 @@
+type: object
+properties:
+  _id:
+    type: string
+    example: '64f0b81f5f4a5c3f1c2d3e40'
+  title:
+    type: string
+    example: 'Happy'

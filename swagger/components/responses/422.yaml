@@ -1,0 +1,12 @@
+description: Validation error
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        message:
+          type: string
+          example: 'At least one emotion is required'
