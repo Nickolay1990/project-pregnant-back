@@ -1,0 +1,67 @@
+tags:
+  - Users
+summary: Patch user data by id
+operationId: patchDataUser
+description: 'Updating user data'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            description: 'User name'
+            type: string
+            example: Palilov Oleksandr
+          email:
+            description: 'Registered email'
+            type: string
+            example: 'opalilovit@gmail.com'
+          gender:
+            description: 'Gender of the child'
+            type: string
+            enum: ['boy', 'girl', 'I don`t know yet']
+          dueDate:
+            description: 'Date before delivery in YYYY-MM-DD format'
+            type: string
+            example: 2025-09-29
+          photo:
+            description: Link to user photo
+            type: string
+            format: binary
+responses:
+  '200':
+    description: 'Updating user data'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully update a user!
+            data:
+              type: object
+              $ref: ../../../components/schemas/user.yaml
+  '401':
+    $ref: ../../../components/responses/401_session.yaml
+  '404':
+    $ref: ../../../components/responses/404_login.yaml
+  '500':
+    $ref: '../../../components/responses/500.yaml'

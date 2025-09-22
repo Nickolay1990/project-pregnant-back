@@ -23,6 +23,27 @@ servers:
   - url: http://localhost:3000
   - url: https://project-pregnant-back.onrender.com
 paths:
+  /api/auth/register:
+    post:
+      $ref: ../swagger/paths/auth/registerPost.yaml
+  /api/auth/login:
+    post:
+      $ref: ../swagger/paths/auth/loginPost.yaml
+  /api/auth/refresh:
+    post:
+      $ref: ../swagger/paths/auth/refreshTokenPost.yaml
+  /api/auth/logout:
+    post:
+      $ref: ../swagger/paths/auth/logoutPost.yaml
+  /api/users/currentUser:
+    get:
+      $ref: ../swagger/paths/users/getCurrentUser.yaml
+  /api/users/updateUserPhoto/{id}:
+    patch:
+      $ref: ../swagger/paths/users/{id}/updateUserPhotoPatch.yaml
+  /api/users/updateUserData/{id}:
+    patch:
+      $ref: ../swagger/paths/users/{id}/updateUserDataPatch.yaml
 components:
   securitySchemes:
     bearerAuth:

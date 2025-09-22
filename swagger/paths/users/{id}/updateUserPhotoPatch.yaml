@@ -1,0 +1,53 @@
+tags:
+  - Users
+summary: Patch user photo by id
+operationId: updatePhoto
+description: 'Patched user avatar'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          photo:
+            description: 'Link to contact`s photo'
+            type: string
+            format: binary
+responses:
+  '200':
+    description: 'Patched user avatar'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully update avatar user!'
+            data:
+              type: object
+              $ref: ../../../components/schemas/user.yaml
+  '400':
+    $ref: ../../../components/responses/400.yaml
+  '401':
+    $ref: ../../../components/responses/401_session.yaml
+  '404':
+    $ref: ../../../components/responses/404_login.yaml
+  '500':
+    $ref: '../../../components/responses/500.yaml'
