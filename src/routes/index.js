@@ -14,6 +14,6 @@ router.use('/api/diaries', diariesRouter);
 router.use('/api/emotions', emotionsRouter);
 router.use('/api/users', authenticate, usersRouter);
 router.use('/api/tasks', tasksRouter);
-router.use('/api/week', weekRouter);
+router.use('/api/weeks', weekRouter);
 
 export default router;
