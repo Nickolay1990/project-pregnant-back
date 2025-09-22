@@ -7,13 +7,17 @@
   "scripts": {
     "lint": "eslint src/**/*.js",
     "start": "node ./src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build": "npm run build-docs",
+    "build-docs": "redocly bundle docs/openapi.yaml --ext json -o docs/swagger.json",
+    "preview-docs": "redocly preview-docs"
   },
   "keywords": [],
   "author": "Alexander Repeta <a.repeta@goit.global>",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.2.0",
+    "@redocly/cli": "^2.1.5",
     "eslint": "^9.2.0",
     "globals": "^15.1.0",
     "nodemon": "^3.1.10"
@@ -28,6 +32,7 @@
     "http-errors": "^2.0.0",
     "joi": "^18.0.1",
     "mongoose": "^8.18.1",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "swagger-ui-express": "^5.0.1"
   }
 }
