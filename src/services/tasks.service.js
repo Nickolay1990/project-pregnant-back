@@ -1,3 +1,4 @@
+import createHttpError from 'http-errors';
 import { Task } from '../models/task.model.js';
 
 export async function getTasksService() {
@@ -5,20 +6,19 @@ export async function getTasksService() {
 }
 
 export async function createTaskService(payload) {
-  const doc = await Task.create({
-    name: String(payload?.name ?? '').trim(),
-    date: String(payload?.date ?? ''),
-    isDone: Boolean(payload?.isDone),
-  });
-  return { task: doc.toObject() };
+  const newTask = await Task.create(payload);
+  return newTask;
 }
 
 export async function toggleTaskStatusService(taskId) {
   const doc = await Task.findById(taskId);
-  if (!doc) return { error: 'Task not found', status: 404 };
+
+  if (!doc) {
+    throw createHttpError(401, 'Task not found');
+  }
 
   doc.isDone = !doc.isDone;
   await doc.save();
 
-  return { task: doc.toObject() };
+  return doc;
 }

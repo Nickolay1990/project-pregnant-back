@@ -24,7 +24,12 @@ export const getPublicDashboardController = async (req, res) => {
 export const getWeekDashboardController = async (req, res) => {
   const weekNumber = calculateCurrentWeekFromUser(req.user);
   const data = await getWeekDashboardService(weekNumber, req.user);
-  res.status(200).json(data);
+
+  res.status(200).json({
+    status: 200,
+    message: 'Данні отримані',
+    data: data,
+  });
 };
 
 // Малюк
@@ -33,7 +38,12 @@ export const getBabyDevelopmentController = async (req, res) => {
     ? validateWeekParam(req.params.week)
     : calculateCurrentWeekFromUser(req.user);
   const data = await getBabyDevelopmentService(weekNumber);
-  res.status(200).json(data);
+
+  res.status(200).json({
+    status: 200,
+    message: 'Данні отримані',
+    data: data,
+  });
 };
 
 // Мама
@@ -42,5 +52,10 @@ export const getMomBodyController = async (req, res) => {
     ? validateWeekParam(req.params.week)
     : calculateCurrentWeekFromUser(req.user);
   const data = await getMomBodyService(weekNumber);
-  res.status(200).json(data);
+
+  res.status(200).json({
+    status: 200,
+    message: 'Данні отримані',
+    data: data,
+  });
 };
