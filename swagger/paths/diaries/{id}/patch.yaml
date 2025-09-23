@@ -49,8 +49,8 @@ responses:
               type: string
               example: Diary updated successfully
             data:
-              $ref: '../../components/schemas/diary.yaml'
+              $ref: '../../../components/schemas/diary.yaml'
   '404':
-    $ref: '../../components/responses/404_notFound.yaml'
+    $ref: '../../../components/responses/404_notFound.yaml'
   '422':
-    $ref: '../../components/responses/422.yaml'
+    $ref: '../../../components/responses/422.yaml'

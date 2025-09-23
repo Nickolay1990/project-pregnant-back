@@ -14,18 +14,22 @@ requestBody:
         required:
           - title
           - emotions
-      properties:
-        title:
-          type: string
-          example: 'My new day'
-        emotions:
-          type: array
-          items:
+        properties:
+          title:
             type: string
-            example: '64f0b81f5f4a5c3f1c2d3e4f'
-        descr:
-          type: string
-          example: 'Walked in the park'
+            example: 'My new day'
+          emotions:
+            type: array
+            items:
+              type: string
+              example: '64f0b81f5f4a5c3f1c2d3e4f'
+          descr:
+            type: string
+            example: 'Walked in the park'
+        example:
+          title: 'My new day'
+          emotions: ['64f0b81f5f4a5c3f1c2d3e4f']
+          descr: 'Walked in the park'
 responses:
   '201':
     description: Diary created successfully
@@ -44,7 +48,7 @@ responses:
             message:
               type: string
               example: Diary created successfully
-              data:
-                $ref: '../../components/schemas/diary.yaml'
+            data:
+              $ref: '../../components/schemas/diary.yaml'
   '422':
     $ref: '../../components/responses/422.yaml'
