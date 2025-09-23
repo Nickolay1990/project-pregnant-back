@@ -1,0 +1,31 @@
+type: object
+required:
+  - _id
+  - name
+  - email
+  - gender
+properties:
+  _id:
+    description: 'Unique user id'
+    type: string
+    example: 65ca67e7ae7f10c88b598384
+  name:
+    description: 'User name'
+    type: string
+    example: Palilov Oleksandr
+  email:
+    description: 'Unique user email'
+    type: string
+    example: opalilovit@gmail.com
+  gender:
+    description: 'Gender of the child'
+    type: string
+    enum: ['boy', 'girl', 'I don`t know yet']
+  dueDate:
+    description: 'Date before delivery in YYYY-MM-DD format'
+    type: string
+    example: 2025-09-29
+  photo:
+    description: 'Link to user photo'
+    type: string
+    example: https://res.cloudinary.com/dlu3qdnnl/image/upload/v1758449184/enkftravm5gadbzc3ssk.jpg

@@ -1,0 +1,14 @@
+tags:
+  - Auth
+summary: Logout user
+operationId: logoutUser
+description: 'Logout user and delete session'
+security:
+  - bearerAuth: []
+responses:
+  '204':
+    description: 'Logout user and delete session'
+  '401':
+    $ref: ../../../components/responses/session/401.yaml
+  '500':
+    $ref: ../../../components/responses/500.yaml
