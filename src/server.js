@@ -14,14 +14,7 @@ export const startServer = () => {
   const app = express();
 
   app.use(express.json());
-  app.use(
-    cors({
-      origin: 'https://project-pregnant.vercel.app', // разрешаем только этот домен
-      credentials: true, // включаем поддержку куков
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-    }),
-  );
+  app.use(cors());
   app.use(cookieParser());
 
   app.use('/api-docs', swaggerDocs());
