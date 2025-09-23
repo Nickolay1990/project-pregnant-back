@@ -25,10 +25,10 @@ responses:
               example: Successfully refreshed a session!
             data:
               type: object
-              $ref: ../../../components/schemas/accessToken.yaml
+              $ref: ../../../components/schemas/auth/accessToken.yaml
   '401':
-    $ref: ../../../components/responses/session/401.yaml
+    $ref: ../../../components/responses/auth/refreshToken/401-refreshToken.yaml
   '404':
-    $ref: ../../../components/responses/session/404.yaml
+    $ref: ../../../components/responses/auth/refreshToken/404-refreshToken.yaml
   '500':
     $ref: ../../../components/responses/500.yaml

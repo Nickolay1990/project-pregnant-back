@@ -38,13 +38,13 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully registered a user!
+              example: Successfully logged in an user!
             data:
               type: object
-              $ref: ../../../components/schemas/accessToken.yaml
+              $ref: ../../../components/schemas/auth/accessToken.yaml
   '401':
-    $ref: ../../../components/responses/login/401.yaml
+    $ref: ../../../components/responses/auth/login/401-login.yaml
   '404':
-    $ref: ../../../components/responses/login/404.yaml
+    $ref: ../../../components/responses/auth/login/404-login.yaml
   '500':
     $ref: ../../../components/responses/500.yaml
