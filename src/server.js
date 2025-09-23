@@ -14,7 +14,12 @@ export const startServer = () => {
   const app = express();
 
   app.use(express.json());
-  app.use(cors());
+  app.use(
+    cors({
+      origin: 'https://project-pregnant.vercel.app', // твой фронт
+      credentials: true, // разрешаем куки
+    }),
+  );
   app.use(cookieParser());
 
   app.use('/api-docs', swaggerDocs());
