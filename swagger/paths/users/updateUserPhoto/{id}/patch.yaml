@@ -42,12 +42,12 @@ responses:
               example: 'Successfully update avatar user!'
             data:
               type: object
-              $ref: ../../../components/schemas/user.yaml
+              $ref: ../../../../components/schemas/user.yaml
   '400':
-    $ref: ../../../components/responses/400.yaml
+    $ref: ../../../../components/responses/400.yaml
   '401':
-    $ref: ../../../components/responses/401_session.yaml
+    $ref: ../../../../components/responses/session/401.yaml
   '404':
-    $ref: ../../../components/responses/404_login.yaml
+    $ref: ../../../../components/responses/login/404.yaml
   '500':
-    $ref: '../../../components/responses/500.yaml'
+    $ref: ../../../../components/responses/500.yaml

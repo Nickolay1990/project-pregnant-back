@@ -9,6 +9,6 @@ responses:
   '204':
     description: 'Logout user and delete session'
   '401':
-    $ref: ../../components/responses/401_session.yaml
+    $ref: ../../../components/responses/session/401.yaml
   '500':
-    $ref: ../../components/responses/500.yaml
+    $ref: ../../../components/responses/500.yaml
