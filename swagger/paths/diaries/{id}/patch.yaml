@@ -51,6 +51,6 @@ responses:
             data:
               $ref: '../../../components/schemas/diary.yaml'
   '404':
-    $ref: '../../../components/responses/404_notFound.yaml'
+    $ref: ../../../components/responses/diaries/404_notFoundDiary.yaml
   '422':
-    $ref: '../../../components/responses/422.yaml'
+    $ref: ../../../components/responses/diaries/422_validationErrorDiary.yaml
