@@ -21,6 +21,9 @@ responses:
       application/json:
         schema:
           $ref: '../../../components/schemas/baby.yaml'
-
+  '400':
+    $ref: ../../../components/responses/weeks/400-weeks.yaml
+  '401':
+    $ref: ../../../components/responses/weeks/401-weeks.yaml
   '404':
-    $ref: '../../../components/responses/404.yaml'
+    $ref: ../../../components/responses/weeks/404-weeks.yaml

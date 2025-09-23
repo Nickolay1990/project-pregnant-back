@@ -1,0 +1,26 @@
+description: Not found errors
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/ErrorResponse.yaml
+    examples:
+      publicDashboardNotFound:
+        summary: Public dashboard data missing
+        value:
+          status: 404
+          message: Data not found for public dashboard
+      weekNotFound:
+        summary: Week data missing
+        value:
+          status: 404
+          message: Data not found for this week
+      babyNotFound:
+        summary: Baby state missing
+        value:
+          status: 404
+          message: Baby development not found
+      momNotFound:
+        summary: Mom state missing
+        value:
+          status: 404
+          message: Mom state not found

@@ -29,15 +29,11 @@ paths:
   /api/weeks/dashboard:
     get:
       $ref: ../swagger/paths/weeks/dashboard.yaml
-  /api/weeks/baby:
-    get:
-      $ref: ../swagger/paths/weeks/baby.yaml
+
   /api/weeks/{week}/baby:
     get:
       $ref: ../swagger/paths/weeks/{week}/baby.yaml
-  /api/weeks/mom:
-    get:
-      $ref: ../swagger/paths/weeks/mom.yaml
+
   /api/weeks/{week}/mom:
     get:
       $ref: ../swagger/paths/weeks/{week}/mom.yaml

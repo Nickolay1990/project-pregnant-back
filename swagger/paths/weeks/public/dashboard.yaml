@@ -22,16 +22,5 @@ responses:
               $ref: ../../../components/schemas/baby.yaml
             mom:
               $ref: ../../../components/schemas/mom.yaml
-  '400':
-    description: Pregnancy start date not found in user profile
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            status:
-              type: integer
-              example: 400
-            message:
-              type: string
-              example: Pregnancy start date not found in user profile
+  '404':
+    $ref: ../../../components/responses/weeks/404-weeks.yaml

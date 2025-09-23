@@ -80,25 +80,8 @@
               }
             }
           },
-          "400": {
-            "description": "Pregnancy start date not found in user profile",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 400
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Pregnancy start date not found in user profile"
-                    }
-                  }
-                }
-              }
-            }
+          "404": {
+            "$ref": "#/components/responses/404-weeks"
           }
         }
       }
@@ -142,33 +125,12 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/weeks/baby": {
-      "get": {
-        "tags": [
-          "Weeks"
-        ],
-        "summary": "Get baby development (current week)",
-        "operationId": "getBabyCurrent",
-        "description": "Get baby development for the current pregnancy week of authenticated user",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Baby development info",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/baby"
-                }
-              }
-            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401-weeks"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-weeks"
           }
         }
       }
@@ -210,35 +172,14 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400-weeks"
+          },
+          "401": {
+            "$ref": "#/components/responses/401-weeks"
+          },
           "404": {
-            "$ref": "#/components/responses/404"
-          }
-        }
-      }
-    },
-    "/api/weeks/mom": {
-      "get": {
-        "tags": [
-          "Weeks"
-        ],
-        "summary": "Get mom body (current week)",
-        "operationId": "getMomCurrent",
-        "description": "Get mom body info for the current pregnancy week of authenticated user",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Mom body info",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/mom"
-                }
-              }
-            }
+            "$ref": "#/components/responses/404-weeks"
           }
         }
       }
@@ -280,8 +221,493 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400-weeks"
+          },
+          "401": {
+            "$ref": "#/components/responses/401-weeks"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-weeks"
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register user",
+        "operationId": "registerUser",
+        "description": "User registration",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "User name",
+                    "type": "string",
+                    "example": "Palilov Oleksandr"
+                  },
+                  "email": {
+                    "description": "Unique email user",
+                    "type": "string",
+                    "example": "opalilovit@gmail.com"
+                  },
+                  "password": {
+                    "description": "Unique password user",
+                    "type": "string",
+                    "example": "Osad998fjds"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully registered a user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login user",
+        "operationId": "loginUser",
+        "description": "Login user",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "Registered email",
+                    "type": "string",
+                    "example": "opalilovit@gmail.com"
+                  },
+                  "password": {
+                    "description": "Password entered during registration",
+                    "type": "string",
+                    "example": "Osad998fjds"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully registered a user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/accessToken"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
           "404": {
             "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Refresh accessToken",
+        "operationId": "refreshToken",
+        "description": "Refresh accessToken",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Refresh accessToken",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully refreshed a session!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/accessToken"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401-2"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-2"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout user",
+        "operationId": "logoutUser",
+        "description": "Logout user and delete session",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Logout user and delete session"
+          },
+          "401": {
+            "$ref": "#/components/responses/401-2"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/users/currentUser": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Current user",
+        "operationId": "currentUser",
+        "description": "Information about the authorized current user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the authorized current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found current user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/users/updateUserPhoto/{id}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Patch user photo by id",
+        "operationId": "updatePhoto",
+        "description": "Patched user avatar",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "photo": {
+                    "description": "Link to contact`s photo",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Patched user avatar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully update avatar user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401-2"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/users/updateUserData/{id}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Patch user data by id",
+        "operationId": "patchDataUser",
+        "description": "Updating user data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "User name",
+                    "type": "string",
+                    "example": "Palilov Oleksandr"
+                  },
+                  "email": {
+                    "description": "Registered email",
+                    "type": "string",
+                    "example": "opalilovit@gmail.com"
+                  },
+                  "gender": {
+                    "description": "Gender of the child",
+                    "type": "string",
+                    "enum": [
+                      "boy",
+                      "girl",
+                      "I don`t know yet"
+                    ]
+                  },
+                  "dueDate": {
+                    "description": "Date before delivery in YYYY-MM-DD format",
+                    "type": "string",
+                    "example": "2025-09-29"
+                  },
+                  "photo": {
+                    "description": "Link to user photo",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updating user data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully update a user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401-2"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -389,10 +815,253 @@
             "example": "Resource not found"
           }
         }
+      },
+      "user": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "email",
+          "gender"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Unique user id",
+            "type": "string",
+            "example": "65ca67e7ae7f10c88b598384"
+          },
+          "name": {
+            "description": "User name",
+            "type": "string",
+            "example": "Palilov Oleksandr"
+          },
+          "email": {
+            "description": "Unique user email",
+            "type": "string",
+            "example": "opalilovit@gmail.com"
+          },
+          "gender": {
+            "description": "Gender of the child",
+            "type": "string",
+            "enum": [
+              "boy",
+              "girl",
+              "I don`t know yet"
+            ]
+          },
+          "dueDate": {
+            "description": "Date before delivery in YYYY-MM-DD format",
+            "type": "string",
+            "example": "2025-09-29"
+          },
+          "photo": {
+            "description": "Link to user photo",
+            "type": "string",
+            "example": "https://res.cloudinary.com/dlu3qdnnl/image/upload/v1758449184/enkftravm5gadbzc3ssk.jpg"
+          }
+        }
+      },
+      "accessToken": {
+        "type": "object",
+        "required": [
+          "accessToken"
+        ],
+        "properties": {
+          "accessToken": {
+            "description": "Specially generated token",
+            "type": "string",
+            "example": "jLMXnAqZnuLfjgUA3sF95pmmAES"
+          }
+        }
       }
     },
     "responses": {
+      "400": {
+        "description": "No file uploaded!",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No file uploaded or Only a photo file can be uploaded"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "404": {
+        "description": "User not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "409": {
+        "description": "Email in use",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 409
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email in use"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Something went wrong.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong."
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Detailed error message (visible only in development)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404-weeks": {
         "description": "Not found errors",
         "content": {
           "application/json": {
@@ -400,6 +1069,13 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
+              "publicDashboardNotFound": {
+                "summary": "Public dashboard data missing",
+                "value": {
+                  "status": 404,
+                  "message": "Data not found for public dashboard"
+                }
+              },
               "weekNotFound": {
                 "summary": "Week data missing",
                 "value": {
@@ -419,6 +1095,128 @@
                 "value": {
                   "status": 404,
                   "message": "Mom state not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "401-weeks": {
+        "description": "Unauthorized error (weeks endpoints)",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not authenticated"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400-weeks": {
+        "description": "Invalid week number. Must be between 1 and 42.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid week number. Must be between 1 and 42."
+                }
+              }
+            }
+          }
+        }
+      },
+      "401-2": {
+        "description": "Session token expired",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Session token expired"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404-2": {
+        "description": "Session not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Session not found"
+                    }
+                  }
                 }
               }
             }
