@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Students app",
+    "title": "Pregnant tracker",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -43,12 +43,387 @@
       "description": "Operations about weeks."
     }
   ],
-  "paths": null,
+  "paths": {
+    "/api/weeks/public/dashboard": {
+      "get": {
+        "tags": [
+          "Weeks"
+        ],
+        "summary": "Public dashboard (week 1)",
+        "operationId": "getPublicDashboard",
+        "description": "Get week 1 dashboard info (no auth required)",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Public dashboard response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "weekNumber": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "daysLeft": {
+                      "type": "integer",
+                      "example": 287
+                    },
+                    "baby": {
+                      "$ref": "#/components/schemas/baby"
+                    },
+                    "mom": {
+                      "$ref": "#/components/schemas/mom"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pregnancy start date not found in user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Pregnancy start date not found in user profile"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/weeks/dashboard": {
+      "get": {
+        "tags": [
+          "Weeks"
+        ],
+        "summary": "Private dashboard (current week from user)",
+        "operationId": "getPrivateDashboard",
+        "description": "Get dashboard info for the current pregnancy week of authenticated user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private dashboard response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "weekNumber": {
+                      "type": "integer",
+                      "example": 12
+                    },
+                    "daysLeft": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "baby": {
+                      "$ref": "#/components/schemas/baby"
+                    },
+                    "mom": {
+                      "$ref": "#/components/schemas/mom"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/weeks/baby": {
+      "get": {
+        "tags": [
+          "Weeks"
+        ],
+        "summary": "Get baby development (current week)",
+        "operationId": "getBabyCurrent",
+        "description": "Get baby development for the current pregnancy week of authenticated user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Baby development info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/baby"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/weeks/{week}/baby": {
+      "get": {
+        "tags": [
+          "Weeks"
+        ],
+        "summary": "Get baby development by week",
+        "operationId": "getBabyByWeek",
+        "description": "Get baby development info for a specific pregnancy week",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "week",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 42,
+              "example": 12
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Baby development info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/baby"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
+    },
+    "/api/weeks/mom": {
+      "get": {
+        "tags": [
+          "Weeks"
+        ],
+        "summary": "Get mom body (current week)",
+        "operationId": "getMomCurrent",
+        "description": "Get mom body info for the current pregnancy week of authenticated user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mom body info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/mom"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/weeks/{week}/mom": {
+      "get": {
+        "tags": [
+          "Weeks"
+        ],
+        "summary": "Get mom body by week",
+        "operationId": "getMomByWeek",
+        "description": "Get mom body info for a specific pregnancy week",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "week",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 42,
+              "example": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mom body info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/mom"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
+    }
+  },
   "components": {
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "baby": {
+        "type": "object",
+        "required": [
+          "weekNumber",
+          "babyDevelopment"
+        ],
+        "properties": {
+          "weekNumber": {
+            "type": "integer",
+            "example": 12
+          },
+          "analogy": {
+            "type": "string",
+            "example": "Слива"
+          },
+          "babySize": {
+            "type": "number",
+            "example": 5.4
+          },
+          "babyWeight": {
+            "type": "number",
+            "example": 14
+          },
+          "image": {
+            "type": "string",
+            "example": "https://ftp.goit.study/img/lehlehka/example.webp"
+          },
+          "babyActivity": {
+            "type": "string",
+            "example": "Малюк вже вміє стискати кулачки"
+          },
+          "babyDevelopment": {
+            "type": "string",
+            "example": "Розвиваються рефлекси"
+          },
+          "interestingFact": {
+            "type": "string",
+            "example": "На пальчиках з'являються відбитки"
+          },
+          "momDailyTips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Пийте більше води",
+              "Робіть вправи Кегеля"
+            ]
+          }
+        }
+      },
+      "mom": {
+        "type": "object",
+        "required": [
+          "weekNumber",
+          "bodyChanges"
+        ],
+        "properties": {
+          "weekNumber": {
+            "type": "integer",
+            "example": 12
+          },
+          "bodyChanges": {
+            "type": "string",
+            "example": "З'являється животик"
+          },
+          "healthTips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Більше відпочивай",
+              "Харчуйся правильно"
+            ]
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "message"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 404
+          },
+          "message": {
+            "type": "string",
+            "example": "Resource not found"
+          }
+        }
+      }
+    },
+    "responses": {
+      "404": {
+        "description": "Not found errors",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "weekNotFound": {
+                "summary": "Week data missing",
+                "value": {
+                  "status": 404,
+                  "message": "Data not found for this week"
+                }
+              },
+              "babyNotFound": {
+                "summary": "Baby state missing",
+                "value": {
+                  "status": 404,
+                  "message": "Baby development not found"
+                }
+              },
+              "momNotFound": {
+                "summary": "Mom state missing",
+                "value": {
+                  "status": 404,
+                  "message": "Mom state not found"
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -1,0 +1,14 @@
+tags:
+  - Weeks
+summary: Get baby development (current week)
+operationId: getBabyCurrent
+description: Get baby development for the current pregnancy week of authenticated user
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Baby development info
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/baby.yaml'

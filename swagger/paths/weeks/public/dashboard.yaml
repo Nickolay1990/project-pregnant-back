@@ -1,0 +1,37 @@
+tags:
+  - Weeks
+summary: Public dashboard (week 1)
+operationId: getPublicDashboard
+description: Get week 1 dashboard info (no auth required)
+security: []
+responses:
+  '200':
+    description: Public dashboard response
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            weekNumber:
+              type: integer
+              example: 1
+            daysLeft:
+              type: integer
+              example: 287
+            baby:
+              $ref: ../../../components/schemas/baby.yaml
+            mom:
+              $ref: ../../../components/schemas/mom.yaml
+  '400':
+    description: Pregnancy start date not found in user profile
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: Pregnancy start date not found in user profile

@@ -1,0 +1,18 @@
+type: object
+required:
+  - weekNumber
+  - bodyChanges
+properties:
+  weekNumber:
+    type: integer
+    example: 12
+  bodyChanges:
+    type: string
+    example: "З'являється животик"
+  healthTips:
+    type: array
+    items:
+      type: string
+    example:
+      - 'Більше відпочивай'
+      - 'Харчуйся правильно'

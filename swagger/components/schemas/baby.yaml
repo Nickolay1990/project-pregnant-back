@@ -1,0 +1,36 @@
+type: object
+required:
+  - weekNumber
+  - babyDevelopment
+properties:
+  weekNumber:
+    type: integer
+    example: 12
+  analogy:
+    type: string
+    example: 'Слива'
+  babySize:
+    type: number
+    example: 5.4
+  babyWeight:
+    type: number
+    example: 14
+  image:
+    type: string
+    example: https://ftp.goit.study/img/lehlehka/example.webp
+  babyActivity:
+    type: string
+    example: 'Малюк вже вміє стискати кулачки'
+  babyDevelopment:
+    type: string
+    example: 'Розвиваються рефлекси'
+  interestingFact:
+    type: string
+    example: "На пальчиках з'являються відбитки"
+  momDailyTips:
+    type: array
+    items:
+      type: string
+    example:
+      - 'Пийте більше води'
+      - 'Робіть вправи Кегеля'

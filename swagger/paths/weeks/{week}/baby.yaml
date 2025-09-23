@@ -1,0 +1,26 @@
+tags:
+  - Weeks
+summary: Get baby development by week
+operationId: getBabyByWeek
+description: Get baby development info for a specific pregnancy week
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: week
+    required: true
+    schema:
+      type: integer
+      minimum: 1
+      maximum: 42
+      example: 12
+responses:
+  '200':
+    description: Baby development info
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/baby.yaml'
+
+  '404':
+    $ref: '../../../components/responses/404.yaml'
