@@ -1,0 +1,32 @@
+description: 'Bad Request'
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: 'Something went wrong'
+        data:
+          type: string
+          example: Bad request
+    examples:
+      NoFileUploaded:
+        summary: No photo file was uploaded
+        value:
+          status: 400
+          message: Something went wrong
+          data: 'No file uploaded!'
+      OnlyPhotoFileAllowed:
+        summary: Request body contains data other than a photo file
+        value:
+          status: 400
+          message: Something went wrong
+          data: 'Only a photo file can be uploaded.'

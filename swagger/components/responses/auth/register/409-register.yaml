@@ -1,4 +1,4 @@
-description: 'Unauthorized'
+description: 'Email in use'
 content:
   application/json:
     schema:
@@ -10,15 +10,10 @@ content:
       properties:
         status:
           type: integer
-          example: 401
+          example: 409
         message:
           type: string
           example: Something went wrong
         data:
-          type: object
-          required:
-            - message
-          properties:
-            message:
-              type: string
-              example: Unauthorized
+          type: string
+          example: Email in use

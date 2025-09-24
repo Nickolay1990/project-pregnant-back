@@ -1,0 +1,50 @@
+description: 'Authentication errors'
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: Something went wrong
+        data:
+          type: string
+          example: Authenticate error
+    examples:
+      AuthHeaderMissing:
+        summary: Authorization header is missing
+        value:
+          status: 401
+          message: Something went wrong
+          data: Authorization header is missing.
+      InvalidAuthFormat:
+        summary: Invalid authorization format
+        value:
+          status: 401
+          message: Something went wrong
+          data: Invalid authorization format. Must be "Bearer <token>".
+      SessionNotFound:
+        summary: Session not found
+        value:
+          status: 401
+          message: Something went wrong
+          data: Session not found.
+      RefreshTokenExpired:
+        summary: Refresh token expired
+        value:
+          status: 401
+          message: Something went wrong
+          data: Refresh token expired.
+      UserNotFound:
+        summary: User not found or deleted
+        value:
+          status: 401
+          message: Something went wrong
+          data: User not found or deleted.

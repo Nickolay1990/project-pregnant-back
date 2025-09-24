@@ -15,10 +15,5 @@ content:
           type: string
           example: Something went wrong.
         data:
-          type: object
-          required:
-            - message
-          properties:
-            message:
-              type: string
-              example: 'Detailed error message (visible only in development)'
+          type: string
+          example: Detailed error message (visible only in development)

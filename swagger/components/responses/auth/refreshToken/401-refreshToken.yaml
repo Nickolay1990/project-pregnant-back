@@ -1,4 +1,4 @@
-description: 'Email in use'
+description: 'Session token expired'
 content:
   application/json:
     schema:
@@ -10,15 +10,10 @@ content:
       properties:
         status:
           type: integer
-          example: 409
+          example: 401
         message:
           type: string
           example: Something went wrong
         data:
-          type: object
-          required:
-            - message
-          properties:
-            message:
-              type: string
-              example: Email in use
+          type: string
+          example: Session token expired
