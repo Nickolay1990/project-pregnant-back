@@ -23,6 +23,19 @@ servers:
   - url: http://localhost:3000
   - url: https://project-pregnant-back.onrender.com
 paths:
+  /api/diaries:
+    get:
+      $ref: '../swagger/paths/diaries/get.yaml'
+    post:
+      $ref: '../swagger/paths/diaries/post.yaml'
+  /api/diaries/{id}:
+    patch:
+      $ref: '../swagger/paths/diaries/{id}/patch.yaml'
+    delete:
+      $ref: '../swagger/paths/diaries/{id}/delete.yaml'
+  /api/emotions:
+    get:
+      $ref: '../swagger/paths/emotions/get.yaml'
   /api/auth/register:
     post:
       $ref: ../swagger/paths/auth/register/post.yaml

@@ -1,0 +1,22 @@
+summary: Get all available emotions
+description: Retrieve all emotions available for diary entries
+tags:
+  - Emotions
+responses:
+  '200':
+    description: Successful retrieval of emotions
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Список емоцій отримано'
+            data:
+              type: array
+              items:
+                $ref: '../../components/schemas/emotion.yaml'

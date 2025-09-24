@@ -1,0 +1,36 @@
+tags:
+  - Diaries
+summary: Delete a diary entry
+operationId: deleteDiary
+description: Delete a diary entry by ID
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: diaryId
+    required: true
+    schema:
+      type: string
+      example: '64f0b81f5f4a5c3f1c2d3e4f'
+responses:
+  '200':
+    description: Diary deleted successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Diary deleted successfully
+            data:
+              $ref: '../../../components/schemas/diary.yaml'
+  '404':
+    $ref: ../../../components/responses/diaries/404_notFoundDiary.yaml

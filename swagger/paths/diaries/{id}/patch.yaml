@@ -1,0 +1,56 @@
+tags:
+  - Diaries
+summary: Update an existing diary entry
+operationId: updateDiary
+description: Update a diary entry by ID
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: diaryId
+    required: true
+    schema:
+      type: string
+      example: '64f0b81f5f4a5c3f1c2d3e4f'
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            type: string
+            example: 'Updated title'
+          emotions:
+            type: array
+            items:
+              type: string
+              example: '64f0b81f5f4a5c3f1c2d3e4f'
+          descr:
+            type: string
+            example: 'Updated description'
+responses:
+  '200':
+    description: Diary updated successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Diary updated successfully
+            data:
+              $ref: '../../../components/schemas/diary.yaml'
+  '404':
+    $ref: ../../../components/responses/diaries/404_notFoundDiary.yaml
+  '422':
+    $ref: ../../../components/responses/diaries/422_validationErrorDiary.yaml

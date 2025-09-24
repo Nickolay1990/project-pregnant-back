@@ -1,0 +1,54 @@
+tags:
+  - Diaries
+summary: Create a new diary entry
+operationId: createDiary
+description: Create a new diary entry
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - title
+          - emotions
+        properties:
+          title:
+            type: string
+            example: 'My new day'
+          emotions:
+            type: array
+            items:
+              type: string
+              example: '64f0b81f5f4a5c3f1c2d3e4f'
+          descr:
+            type: string
+            example: 'Walked in the park'
+        example:
+          title: 'My new day'
+          emotions: ['64f0b81f5f4a5c3f1c2d3e4f']
+          descr: 'Walked in the park'
+responses:
+  '201':
+    description: Diary created successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Diary created successfully
+            data:
+              $ref: '../../components/schemas/diary.yaml'
+  '422':
+    $ref: ../../components/responses/diaries/422_validationErrorDiary.yaml
