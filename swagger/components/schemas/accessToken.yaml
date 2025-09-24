@@ -1,0 +1,8 @@
+type: object
+required:
+  - accessToken
+properties:
+  accessToken:
+    description: 'Specially generated token'
+    type: string
+    example: jLMXnAqZnuLfjgUA3sF95pmmAES
