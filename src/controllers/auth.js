@@ -7,7 +7,9 @@ import {
 import { setupSession } from '../utils/setupSession.js';
 
 export const registerUserController = async (req, res) => {
-  const user = await registerUser(req.body);
+  const { user, session } = await registerUser(req.body);
+
+  setupSession(res, session);
 
   res.status(201).json({
     status: 201,
