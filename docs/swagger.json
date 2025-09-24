@@ -127,7 +127,7 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/401-weeks"
+            "$ref": "#/components/responses/401-authenticate"
           },
           "404": {
             "$ref": "#/components/responses/404-weeks"
@@ -176,7 +176,7 @@
             "$ref": "#/components/responses/400-weeks"
           },
           "401": {
-            "$ref": "#/components/responses/401-weeks"
+            "$ref": "#/components/responses/401-authenticate"
           },
           "404": {
             "$ref": "#/components/responses/404-weeks"
@@ -225,7 +225,7 @@
             "$ref": "#/components/responses/400-weeks"
           },
           "401": {
-            "$ref": "#/components/responses/401-weeks"
+            "$ref": "#/components/responses/401-authenticate"
           },
           "404": {
             "$ref": "#/components/responses/404-weeks"
@@ -1191,7 +1191,7 @@
           }
         }
       },
-      "Emotion": {
+      "emotion": {
         "type": "object",
         "properties": {
           "_id": {
@@ -1222,7 +1222,7 @@
           "emotions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Emotion"
+              "$ref": "#/components/schemas/emotion"
             }
           },
           "userId": {
@@ -1238,19 +1238,6 @@
             "type": "string",
             "format": "date-time",
             "example": "2025-09-22T12:35:01.000Z"
-          }
-        }
-      },
-      "emotion": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "example": "64f0b81f5f4a5c3f1c2d3e40"
-          },
-          "title": {
-            "type": "string",
-            "example": "Happy"
           }
         }
       }
@@ -1325,15 +1312,16 @@
           }
         }
       },
-      "401-weeks": {
-        "description": "Unauthorized error (weeks endpoints)",
+      "401-authenticate": {
+        "description": "Authentication errors",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
               "required": [
                 "status",
-                "message"
+                "message",
+                "data"
               ],
               "properties": {
                 "status": {
@@ -1342,7 +1330,53 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "User not authenticated"
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "string",
+                  "example": "Authenticate error"
+                }
+              }
+            },
+            "examples": {
+              "AuthHeaderMissing": {
+                "summary": "Authorization header is missing",
+                "value": {
+                  "status": 401,
+                  "message": "Something went wrong",
+                  "data": "Authorization header is missing."
+                }
+              },
+              "InvalidAuthFormat": {
+                "summary": "Invalid authorization format",
+                "value": {
+                  "status": 401,
+                  "message": "Something went wrong",
+                  "data": "Invalid authorization format. Must be \"Bearer <token>\"."
+                }
+              },
+              "SessionNotFound": {
+                "summary": "Session not found",
+                "value": {
+                  "status": 401,
+                  "message": "Something went wrong",
+                  "data": "Session not found."
+                }
+              },
+              "RefreshTokenExpired": {
+                "summary": "Refresh token expired",
+                "value": {
+                  "status": 401,
+                  "message": "Something went wrong",
+                  "data": "Refresh token expired."
+                }
+              },
+              "UserNotFound": {
+                "summary": "User not found or deleted",
+                "value": {
+                  "status": 401,
+                  "message": "Something went wrong",
+                  "data": "User not found or deleted."
                 }
               }
             }
@@ -1512,77 +1546,6 @@
                 "data": {
                   "type": "string",
                   "example": "Session not found"
-                }
-              }
-            }
-          }
-        }
-      },
-      "401-authenticate": {
-        "description": "Authentication errors",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 401
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "data": {
-                  "type": "string",
-                  "example": "Authenticate error"
-                }
-              }
-            },
-            "examples": {
-              "AuthHeaderMissing": {
-                "summary": "Authorization header is missing",
-                "value": {
-                  "status": 401,
-                  "message": "Something went wrong",
-                  "data": "Authorization header is missing."
-                }
-              },
-              "InvalidAuthFormat": {
-                "summary": "Invalid authorization format",
-                "value": {
-                  "status": 401,
-                  "message": "Something went wrong",
-                  "data": "Invalid authorization format. Must be \"Bearer <token>\"."
-                }
-              },
-              "SessionNotFound": {
-                "summary": "Session not found",
-                "value": {
-                  "status": 401,
-                  "message": "Something went wrong",
-                  "data": "Session not found."
-                }
-              },
-              "RefreshTokenExpired": {
-                "summary": "Refresh token expired",
-                "value": {
-                  "status": 401,
-                  "message": "Something went wrong",
-                  "data": "Refresh token expired."
-                }
-              },
-              "UserNotFound": {
-                "summary": "User not found or deleted",
-                "value": {
-                  "status": 401,
-                  "message": "Something went wrong",
-                  "data": "User not found or deleted."
                 }
               }
             }

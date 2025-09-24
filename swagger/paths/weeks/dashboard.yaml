@@ -24,6 +24,6 @@ responses:
             mom:
               $ref: '../../components/schemas/mom.yaml'
   '401':
-    $ref: ../../components/responses/weeks/401-weeks.yaml
+    $ref: ../../components/responses/auth/401-authenticate.yaml
   '404':
     $ref: ../../components/responses/weeks/404-weeks.yaml

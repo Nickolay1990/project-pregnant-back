@@ -28,7 +28,7 @@ export const getPublicWeekDashboardService = async () => {
 //Приватний
 export const getWeekDashboardService = async (user) => {
   if (!user) {
-    throw createHttpError(401, 'User not authenticated');
+    throw createHttpError(401, 'Unauthorized');
   }
 
   const { weekNumber, daysLeft } = calculateCurrentWeekFromUser(user);
@@ -45,7 +45,7 @@ export const getWeekDashboardService = async (user) => {
 // Розвиток малюка приватний
 export const getBabyDevelopmentService = async (week, user) => {
   if (!user) {
-    throw createHttpError(401, 'User not authenticated');
+    throw createHttpError(401, 'Unauthorized');
   }
 
   const weekNumber = week
@@ -63,7 +63,7 @@ export const getBabyDevelopmentService = async (week, user) => {
 // Стан мами приватний
 export const getMomBodyService = async (week, user) => {
   if (!user) {
-    throw createHttpError(401, 'User not authenticated');
+    throw createHttpError(401, 'Unauthorized');
   }
 
   const weekNumber = week

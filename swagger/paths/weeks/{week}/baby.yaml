@@ -24,6 +24,6 @@ responses:
   '400':
     $ref: ../../../components/responses/weeks/400-weeks.yaml
   '401':
-    $ref: ../../../components/responses/weeks/401-weeks.yaml
+    $ref: ../../../components/responses/auth/401-authenticate.yaml
   '404':
     $ref: ../../../components/responses/weeks/404-weeks.yaml
