@@ -16,8 +16,11 @@ export const startServer = () => {
   app.use(express.json());
   app.use(
     cors({
-      origin: 'https://project-pregnant.vercel.app', // разрешаем только этот домен
-      credentials: true, // включаем поддержку куков
+      origin: [
+        'https://project-pregnant.vercel.app', // фронт на Vercel
+        'http://localhost:3000', // локальный фронт
+      ],
+      credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
     }),
