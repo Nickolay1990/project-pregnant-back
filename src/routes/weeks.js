@@ -20,6 +20,5 @@ weekRouter.use(authenticate);
 
 weekRouter.get('/dashboard', getWeekDashboardController);
 weekRouter.get('/:week/baby', getBabyDevelopmentController);
-weekRouter.get('/baby', getBabyDevelopmentController);
+
 weekRouter.get('/:week/mom', getMomBodyController);
-weekRouter.get('/mom', getMomBodyController);

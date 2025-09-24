@@ -12,3 +12,5 @@ export const setupSession = (res, session) => {
     SameSite: 'None',
   });
 };
+// налаштувати корс
+// і кукіс samesite and secure

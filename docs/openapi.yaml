@@ -23,6 +23,21 @@ servers:
   - url: http://localhost:3000
   - url: https://project-pregnant-back.onrender.com
 paths:
+  /api/weeks/public/dashboard:
+    get:
+      $ref: ../swagger/paths/weeks/public/dashboard.yaml
+  /api/weeks/dashboard:
+    get:
+      $ref: ../swagger/paths/weeks/dashboard.yaml
+
+  /api/weeks/{week}/baby:
+    get:
+      $ref: ../swagger/paths/weeks/{week}/baby.yaml
+
+  /api/weeks/{week}/mom:
+    get:
+      $ref: ../swagger/paths/weeks/{week}/mom.yaml
+
   /api/auth/register:
     post:
       $ref: ../swagger/paths/auth/register/post.yaml
