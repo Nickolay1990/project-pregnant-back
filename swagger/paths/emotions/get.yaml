@@ -1,7 +1,9 @@
-summary: Get all available emotions
-description: Retrieve all emotions available for diary entries
 tags:
   - Emotions
+summary: Get all available emotions
+operationId: getEmotions
+security: []
+description: Retrieve all emotions available for diary entries
 responses:
   '200':
     description: Successful retrieval of emotions

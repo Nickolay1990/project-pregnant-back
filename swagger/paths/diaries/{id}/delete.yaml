@@ -7,7 +7,7 @@ security:
   - bearerAuth: []
 parameters:
   - in: path
-    name: diaryId
+    name: id
     required: true
     schema:
       type: string
