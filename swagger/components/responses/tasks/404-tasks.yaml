@@ -1,0 +1,15 @@
+description: Task not found
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: Task not found
+        error:
+          type: string
+          example: "No task with the given id"

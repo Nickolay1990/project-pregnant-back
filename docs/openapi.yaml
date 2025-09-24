@@ -72,6 +72,15 @@ paths:
   /api/emotions:
     get:
       $ref: '../swagger/paths/emotions/get.yaml'
+  /api/tasks:
+    get:
+      $ref: '../swagger/paths/tasks/get.yaml'
+    post:
+      $ref: '../swagger/paths/tasks/post.yaml'
+
+  /api/tasks/{taskId}/status:
+    patch:
+      $ref: '../swagger/paths/tasks/{taskId}-status-patch.yaml'
 components:
   securitySchemes:
     bearerAuth:

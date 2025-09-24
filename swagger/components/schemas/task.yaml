@@ -1,0 +1,32 @@
+title: Task
+type: object
+required:
+  - id
+  - name
+  - date
+  - isDone
+properties:
+  id:
+    type: string
+    description: Task ID
+    example: "6719b6be0e9b6a001233abcd"
+  name:
+    type: string
+    description: Task title
+    example: "Проверить отчёт"
+  date:
+    type: string
+    format: date-time
+    description: ISO datetime
+    example: "2025-09-24T09:00:00.000Z"
+  isDone:
+    type: boolean
+    example: false
+  createdAt:
+    type: string
+    format: date-time
+    example: "2025-09-23T12:00:00.000Z"
+  updatedAt:
+    type: string
+    format: date-time
+    example: "2025-09-23T12:30:00.000Z"
