@@ -12,7 +12,7 @@ properties:
   emotions:
     type: array
     items:
-      $ref: './Emotion.yaml'
+      $ref: './emotion.yaml'
   userId:
     type: string
     example: '64f0b81f5f4a5c3f1c2d3e4a'
