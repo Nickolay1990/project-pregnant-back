@@ -1,4 +1,4 @@
-description: 'Something went wrong.'
+description: 'Session not found'
 content:
   application/json:
     schema:
@@ -10,10 +10,10 @@ content:
       properties:
         status:
           type: integer
-          example: 500
+          example: 404
         message:
           type: string
-          example: Something went wrong.
+          example: Something went wrong
         data:
           type: string
-          example: Detailed error message (visible only in development)
+          example: Session not found

@@ -25,8 +25,8 @@ responses:
               example: Successfully found current user!
             data:
               type: object
-              $ref: ../../../components/schemas/user.yaml
+              $ref: ../../../components/schemas/users/user.yaml
   '404':
-    $ref: ../../../components/responses/login/404.yaml
+    $ref: ../../../components/responses/auth/login/404-login.yaml
   '500':
     $ref: ../../../components/responses/500.yaml

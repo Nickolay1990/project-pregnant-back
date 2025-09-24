@@ -58,10 +58,10 @@ responses:
               example: Successfully update a user!
             data:
               type: object
-              $ref: ../../../../components/schemas/user.yaml
+              $ref: ../../../../components/schemas/users/user.yaml
   '401':
-    $ref: ../../../../components/responses/session/401.yaml
+    $ref: ../../../../components/responses/auth/401-authenticate.yaml
   '404':
-    $ref: ../../../../components/responses/login/404.yaml
+    $ref: ../../../../components/responses/auth/login/404-login.yaml
   '500':
     $ref: ../../../../components/responses/500.yaml
