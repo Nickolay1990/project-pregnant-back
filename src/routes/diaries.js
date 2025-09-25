@@ -8,11 +8,11 @@ import {
   updateDiaryController,
 } from '../controllers/diaries.js';
 import { validateDiaryId } from '../middlewares/validateDiaryId.js';
-// import { authenticate } from '../middlewares/authenticate.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 export const diariesRouter = Router();
 
-// diariesRouter.use(authenticate);
+diariesRouter.use(authenticate);
 
 diariesRouter.post('/', validateBody(createDiarySchema), createDiaryController);
 diariesRouter.get('/', getDiariesController);
