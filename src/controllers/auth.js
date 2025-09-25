@@ -19,9 +19,9 @@ export const registerUserController = async (req, res) => {
 };
 
 export const loginUserController = async (req, res) => {
-  const { session, user } = await loginUser(req.body);
+  const { newSession, user } = await loginUser(req.body);
 
-  setupSession(res, session);
+  setupSession(res, newSession);
 
   res.json({
     status: 200,
