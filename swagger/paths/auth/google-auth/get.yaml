@@ -1,0 +1,35 @@
+tags:
+  - Auth
+summary: Get google url
+operationId: GetGoogleUrl
+description: 'Get a link for authorization via Google'
+security: []
+responses:
+  '200':
+    description: 'Get a link for authorization via Google'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get Google OAuth url!
+            data:
+              type: object
+              required:
+                - url
+              properties:
+                url:
+                  description: 'Specially generated url'
+                  type: string
+                  example: https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&client_id=592653281871-airlbmskcopc1o7m2s2ph06ea7crgsv3.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fconfirm-google-auth&service=lso&o2v=2&flowName=GeneralOAuthFlow
+  '500':
+    $ref: ../../../components/responses/500.yaml

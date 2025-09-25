@@ -44,6 +44,12 @@ paths:
   /api/auth/login:
     post:
       $ref: ../swagger/paths/auth/login/post.yaml
+  /api/auth/get-oauth-url:
+    get:
+      $ref: ../swagger/paths/auth/google-auth/get.yaml
+  /api/auth/confirm-google-auth:
+    post:
+      $ref: ../swagger/paths/auth/google-auth/post.yaml
   /api/auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refreshToken/post.yaml
