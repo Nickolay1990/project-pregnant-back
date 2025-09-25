@@ -22,9 +22,9 @@ export const authenticate = async (req, res, next) => {
   }
 
   const now = new Date();
-  const isRefreshTokenExpired = now > new Date(session.refreshTokenValidUntil);
-  if (isRefreshTokenExpired) {
-    throw createHttpError(401, 'Refresh token expired.');
+  const isaccessTokenExpired = now > new Date(session.accessTokenValidUntil);
+  if (isaccessTokenExpired) {
+    throw createHttpError(401, 'access token expired.');
   }
 
   const user = await UsersCollection.findById(session.userId);
