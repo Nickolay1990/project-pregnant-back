@@ -1,0 +1,18 @@
+tags: [Tasks]
+summary: Get tasks
+operationId: getTasks
+security:
+  - bearerAuth: []
+responses:
+  "200":
+    description: List of tasks
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: "../../components/schemas/task.yaml"
+  "401":
+    $ref: "../../components/responses/tasks/401-tasks.yaml"
+  "500":
+    description: Internal server error

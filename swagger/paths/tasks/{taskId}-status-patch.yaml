@@ -1,0 +1,25 @@
+tags: [Tasks]
+summary: Toggle task status
+operationId: toggleTaskStatus
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: taskId
+    required: true
+    schema:
+      type: string
+    description: Task ID
+responses:
+  "200":
+    description: Updated task
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/task.yaml"
+  "401":
+    $ref: "../../components/responses/tasks/401-tasks.yaml"
+  "404":
+    $ref: "../../components/responses/tasks/404-tasks.yaml"
+  "500":
+    description: Internal server error

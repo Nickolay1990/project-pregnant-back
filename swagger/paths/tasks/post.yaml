@@ -1,0 +1,36 @@
+tags: [Tasks]
+summary: Create task
+operationId: createTask
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required: [name, date]
+        properties:
+          name:
+            type: string
+            example: "Позвонить клиенту"
+          date:
+            type: string
+            format: date-time
+            example: "2025-09-24T11:00:00.000Z"
+          isDone:
+            type: boolean
+            example: false
+responses:
+  "201":
+    description: Task created
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/task.yaml"
+  "401":
+    $ref: "../../components/responses/tasks/401-tasks.yaml"
+  "422":
+    $ref: "../../components/responses/tasks/422-tasks.yaml"
+  "500":
+    description: Internal server error
