@@ -31,19 +31,11 @@ export const loginUserController = async (req, res) => {
 };
 
 export const refreshUserSessionController = async (req, res) => {
-  // const rawToken = req.cookies.refreshToken;
-  // console.log(rawToken);
-  // const refreshToken = decodeURIComponent(rawToken);
-  // console.log(refreshToken);
-  // const session = await refreshTokenSession(rawToken);
+  const rawToken = req.cookies.refreshToken;
+  const refreshToken = decodeURIComponent(rawToken);
+  const session = await refreshTokenSession(refreshToken);
 
-  // setupSession(res, session);
-  res.cookie('adddd', '1111', {
-    httpOnly: true,
-    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-    Secure: true,
-    SameSite: 'None',
-  });
+  setupSession(res, session);
 
   res.json({
     status: 200,
