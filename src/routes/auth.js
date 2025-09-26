@@ -17,7 +17,7 @@ authRouter.post(
   registerUserController,
 );
 authRouter.post('/login', validateBody(loginUserSchema), loginUserController);
-authRouter.post('/refresh', authenticate, refreshUserSessionController);
+authRouter.post('/refresh', refreshUserSessionController);
 authRouter.post('/logout', authenticate, logoutUserController);
 
 export default authRouter;
