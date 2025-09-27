@@ -21,7 +21,7 @@ authRouter.post(
 authRouter.post('/login', validateBody(loginUserSchema), loginUserController);
 authRouter.get('/get-oauth-url', getGoogleOAuthUrlController);
 authRouter.get('/confirm-google-auth', googleCallbackController);
-authRouter.post('/refresh', authenticate, refreshUserSessionController);
+authRouter.post('/refresh', refreshUserSessionController);
 authRouter.post('/logout', authenticate, logoutUserController);
 
 export default authRouter;

@@ -7,6 +7,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import router from './routes/index.js';
 import cookieParser from 'cookie-parser';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
+import pino from 'pino-http';
 
 const PORT = Number(getEnvVar('PORT', 3000));
 
@@ -26,6 +27,13 @@ export const startServer = () => {
     }),
   );
   app.use(cookieParser());
+  app.use(
+    pino({
+      transport: {
+        target: 'pino-pretty',
+      },
+    }),
+  );
 
   app.use('/api-docs', swaggerDocs());
   app.use(router);

@@ -16,9 +16,15 @@ export const authenticate = async (req, res, next) => {
     );
   }
 
-  const session = await SessionsCollection.findOne({ accessToken: token });
+  const accessToken = decodeURIComponent(token);
+
+  console.log('111111111111111111111111111', { token });
+  const session = await SessionsCollection.findOne({
+    accessToken: accessToken,
+  });
+
   if (!session) {
-    throw createHttpError(401, 'Session not found.');
+    throw createHttpError(444, 'Session not found.');
   }
 
   const now = new Date();
