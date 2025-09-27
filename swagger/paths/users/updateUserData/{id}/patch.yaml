@@ -34,10 +34,6 @@ requestBody:
             description: 'Date before delivery in YYYY-MM-DD format'
             type: string
             example: 2025-09-29
-          photo:
-            description: Link to user photo
-            type: string
-            format: binary
 responses:
   '200':
     description: 'Updating user data'
@@ -63,5 +59,7 @@ responses:
     $ref: ../../../../components/responses/auth/401-authenticate.yaml
   '404':
     $ref: ../../../../components/responses/auth/login/404-login.yaml
+  '422':
+    $ref: ../../../../components/responses/users/updateUserData/422-updateUserData.yaml
   '500':
     $ref: ../../../../components/responses/500.yaml

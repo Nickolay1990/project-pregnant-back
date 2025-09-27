@@ -1,0 +1,15 @@
+description: Validation error
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        message:
+          type: string
+          example: 'Invalid ID'
+        data:
+          type: string
+          example: 'Invalid data'

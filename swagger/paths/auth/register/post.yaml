@@ -49,5 +49,7 @@ responses:
               $ref: ../../../components/schemas/users/user.yaml
   '409':
     $ref: ../../../components/responses/auth/register/409-register.yaml
+  '422':
+    $ref: ../../../components/responses/auth/login/422-login.yaml
   '500':
     $ref: ../../../components/responses/500.yaml

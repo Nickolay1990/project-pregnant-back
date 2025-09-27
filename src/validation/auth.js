@@ -31,7 +31,7 @@ export const loginUserSchema = Joi.object({
   password: Joi.string().min(8).max(128).required().messages({
     'string.empty': "Пароль є обов'язковим",
     'string.max': 'Пароль має містити не більше 128 символів',
-    'string.min': "Поле ім'я має містити не менше 8 символів",
+    'string.min': 'Поле має містити не менше 8 символів',
     'any.required': "Пароль є обов'язковим",
   }),
 });

@@ -1,0 +1,19 @@
+description: Validation error
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        message:
+          items:
+            type: string
+          example:
+            - message: 'The name field must contain no more than 32 characters.'
+            - message: 'Email must contain no more than 64 characters'
+            - message: 'Another validation error'
+        data:
+          type: string
+          example: 'Invalid data'
