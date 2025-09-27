@@ -22,10 +22,6 @@ export const createDiarySchema = Joi.object({
       'array.min': 'Потрібна щонайменше 1 емоція',
       'any.invalid': 'Невірний формат ідентифікатора емоції',
     }),
-  userId: Joi.string().custom(objectId, 'mongo id').required().messages({
-    'any.required': 'Потрібен userId',
-    'any.invalid': 'Невірний формат userId',
-  }),
 });
 
 export const updateDiarySchema = Joi.object({
