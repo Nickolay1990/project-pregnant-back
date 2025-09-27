@@ -30,6 +30,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
+    "google-auth-library": "^10.3.0",
     "http-errors": "^2.0.0",
     "joi": "^18.0.1",
     "mongoose": "^8.18.1",

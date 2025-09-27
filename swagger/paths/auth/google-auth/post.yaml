@@ -1,0 +1,43 @@
+tags:
+  - Auth
+summary: Google authorization
+operationId: AuthUser
+description: 'User authorization via Google'
+security: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - code
+        properties:
+          code:
+            description: 'Code received from the authorization link'
+            type: string
+            example: 4/0AVGzR1C1T0Ezhe1XwhrjhENMtM6n9t25t0PaabBroY2kzuDLh978LueFhkLyI9li_bfjnQ
+responses:
+  '200':
+    description: 'Successful authorization with Google'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully logged in via Google OAuth!
+            data:
+              type: object
+              $ref: ../../../components/schemas/auth/accessToken.yaml
+  '401':
+    $ref: ../../../components/responses/auth/login/401-login.yaml
+  '500':
+    $ref: ../../../components/responses/500.yaml

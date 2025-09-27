@@ -1,9 +1,12 @@
 import {
+  loginOrSignupWithGoogle,
   loginUser,
   logoutUser,
   refreshTokenSession,
   registerUser,
 } from '../services/auth.js';
+import { getEnvVar } from '../utils/getEnvVar.js';
+import { generateAuthUrl } from '../utils/googleOAuth2.js';
 import { setupSession } from '../utils/setupSession.js';
 
 export const registerUserController = async (req, res) => {
@@ -53,4 +56,29 @@ export const logoutUserController = async (req, res) => {
   res.clearCookie('accessToken');
 
   res.status(204).send();
+};
+
+export const getGoogleOAuthUrlController = async (req, res) => {
+  const url = generateAuthUrl();
+
+  res.json({
+    status: 200,
+    message: 'Successfully get Google OAuth url!',
+    data: {
+      url,
+    },
+  });
+};
+
+export const googleCallbackController = async (req, res, next) => {
+  const { code } = req.query;
+  if (!code) {
+    return res.status(400).send('Missing code');
+  }
+
+  const session = await loginOrSignupWithGoogle(code);
+
+  setupSession(res, session);
+
+  res.redirect(`${getEnvVar('GOOGLE_REDIRECT_UI')}`);
 };

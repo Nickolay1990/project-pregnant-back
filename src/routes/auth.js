@@ -2,6 +2,8 @@ import { Router } from 'express';
 import { validateBody } from '../middlewares/validateBody.js';
 import { loginUserSchema, registerUserSchema } from '../validation/auth.js';
 import {
+  getGoogleOAuthUrlController,
+  googleCallbackController,
   loginUserController,
   logoutUserController,
   refreshUserSessionController,
@@ -17,6 +19,8 @@ authRouter.post(
   registerUserController,
 );
 authRouter.post('/login', validateBody(loginUserSchema), loginUserController);
+authRouter.get('/get-oauth-url', getGoogleOAuthUrlController);
+authRouter.get('/confirm-google-auth', googleCallbackController);
 authRouter.post('/refresh', refreshUserSessionController);
 authRouter.post('/logout', authenticate, logoutUserController);
 
