@@ -41,10 +41,12 @@ responses:
               example: Successfully logged in an user!
             data:
               type: object
-              $ref: ../../../components/schemas/auth/accessToken.yaml
+              $ref: ../../../components/schemas/users/user.yaml
   '401':
     $ref: ../../../components/responses/auth/login/401-login.yaml
   '404':
     $ref: ../../../components/responses/auth/login/404-login.yaml
+  '422':
+    $ref: ../../../components/responses/auth/login/422-login.yaml
   '500':
     $ref: ../../../components/responses/500.yaml

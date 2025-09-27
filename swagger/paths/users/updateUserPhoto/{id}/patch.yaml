@@ -49,5 +49,7 @@ responses:
     $ref: ../../../../components/responses/auth/401-authenticate.yaml
   '404':
     $ref: ../../../../components/responses/auth/login/404-login.yaml
+  '422':
+    $ref: ../../../../components/responses/users/updateUserPhoto/422-updateUserPhoto.yaml
   '500':
     $ref: ../../../../components/responses/500.yaml

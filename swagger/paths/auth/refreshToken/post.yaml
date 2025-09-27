@@ -15,7 +15,6 @@ responses:
           required:
             - status
             - message
-            - data
           properties:
             status:
               type: integer
@@ -23,11 +22,8 @@ responses:
             message:
               type: string
               example: Successfully refreshed a session!
-            data:
-              type: object
-              $ref: ../../../components/schemas/auth/accessToken.yaml
   '401':
-    $ref: ../../../components/responses/auth/refreshToken/401-refreshToken.yaml
+    $ref: ../../../components/responses/auth/401-authenticate.yaml
   '404':
     $ref: ../../../components/responses/auth/refreshToken/404-refreshToken.yaml
   '500':
