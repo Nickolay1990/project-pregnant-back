@@ -47,6 +47,10 @@ export const refreshUserSessionController = async (req, res) => {
 };
 
 export const logoutUserController = async (req, res) => {
+  console.log(
+    'in controller 1111111111111111111111111111111111111111111111111',
+  );
+
   if (req.cookies.refreshToken) {
     const refreshToken = decodeURIComponent(req.cookies.refreshToken);
     await logoutUser(refreshToken);

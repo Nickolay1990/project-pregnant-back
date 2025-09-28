@@ -1,4 +1,4 @@
-import { Emotion } from "../db/models/emotion.js";
+import { Emotion } from '../db/models/emotion.js';
 
 // Контролер для отримання всіх емоцій із БД
 export const getAllEmotionsController = async (req, res) => {
@@ -7,9 +7,11 @@ export const getAllEmotionsController = async (req, res) => {
     .sort({ title: 1 }) // сортуємо по назві
     .lean();
 
+  console.log(emotions);
+
   return res.status(200).json({
     status: 200,
-    message: "Список емоцій отримано",
+    message: 'Список емоцій отримано',
     data: emotions,
   });
 };
