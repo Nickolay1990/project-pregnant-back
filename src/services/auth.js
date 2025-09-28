@@ -85,8 +85,13 @@ export const refreshTokenSession = async (refreshToken) => {
   });
 };
 
-export const logoutUser = async (sessionId) => {
-  await SessionsCollection.deleteOne({ _id: sessionId });
+export const logoutUser = async (refreshToken) => {
+  const session = await SessionsCollection.findOne({ refreshToken });
+  if (!session) {
+    throw createHttpError(404, 'Session not found');
+  }
+
+  await SessionsCollection.deleteOne({ refreshToken });
 };
 
 export const loginOrSignupWithGoogle = async (code) => {
