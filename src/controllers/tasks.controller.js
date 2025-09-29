@@ -4,8 +4,9 @@ import {
   toggleTaskStatusService,
 } from '../services/tasks.service.js';
 
-export async function getTasksController(_req, res) {
-  const tasks = await getTasksService();
+export async function getTasksController(req, res) {
+  const userId = req.user._id;
+  const tasks = await getTasksService(userId);
 
   res.json({
     status: 200,
@@ -15,7 +16,8 @@ export async function getTasksController(_req, res) {
 }
 
 export async function createTaskController(req, res) {
-  const task = await createTaskService(req.body);
+  const userId = req.user._id;
+  const task = await createTaskService(req.body, userId);
 
   res.status(201).json({
     status: 201,
@@ -25,8 +27,9 @@ export async function createTaskController(req, res) {
 }
 
 export async function toggleTaskStatusController(req, res) {
+  const userId = req.user._id;
   const { taskId } = req.params;
-  const task = await toggleTaskStatusService(taskId);
+  const task = await toggleTaskStatusService(taskId, userId);
 
   res.status(200).json({
     status: 200,

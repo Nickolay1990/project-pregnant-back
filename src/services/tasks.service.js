@@ -1,17 +1,18 @@
 import createHttpError from 'http-errors';
 import { Task } from '../models/task.model.js';
 
-export async function getTasksService() {
-  return Task.find({}).sort({ date: 1 }).lean();
+export async function getTasksService(userId) {
+  return Task.find({ userId }).sort({ date: 1 }).lean();
 }
 
-export async function createTaskService(payload) {
-  const newTask = await Task.create(payload);
+export async function createTaskService(payload, userId) {
+  const newTask = await Task.create({ ...payload, userId });
   return newTask;
 }
 
-export async function toggleTaskStatusService(taskId) {
-  const doc = await Task.findById(taskId);
+export async function toggleTaskStatusService(taskId, userId) {
+  const doc = await Task.findOne({ _id: taskId, userId });
+  console.log(doc);
 
   if (!doc) {
     throw createHttpError(401, 'Task not found');

@@ -3,8 +3,6 @@ import { SessionsCollection } from '../db/models/session.js';
 import { UsersCollection } from '../db/models/user.js';
 
 export const authenticate = async (req, res, next) => {
-  console.log('111111111111111111111111111111 in midlware');
-
   const authHeader = req.get('Authorization');
   if (!authHeader) {
     throw createHttpError(401, 'Authorization header is missing.');
