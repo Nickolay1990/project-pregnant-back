@@ -6,6 +6,7 @@ import {
   deleteDiaryController,
   getDiariesController,
   updateDiaryController,
+  getDiaryByIdController,
 } from '../controllers/diaries.js';
 import { validateDiaryId } from '../middlewares/validateDiaryId.js';
 import { authenticate } from '../middlewares/authenticate.js';
@@ -16,6 +17,7 @@ diariesRouter.use(authenticate);
 
 diariesRouter.post('/', validateBody(createDiarySchema), createDiaryController);
 diariesRouter.get('/', getDiariesController);
+diariesRouter.get('/:diaryId', validateDiaryId, getDiaryByIdController);
 diariesRouter.patch(
   '/:diaryId',
   validateDiaryId,

@@ -63,8 +63,6 @@ export const refreshTokenSession = async (refreshToken) => {
     refreshToken,
   });
 
-  console.log('4444444444444444444444', { session });
-
   if (!session) {
     throw createHttpError(404, 'Session not found');
   }

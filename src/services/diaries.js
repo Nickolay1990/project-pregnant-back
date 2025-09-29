@@ -71,3 +71,13 @@ export const deleteDiaryService = async (diaryId, userId) => {
 
   return deleted;
 };
+
+export const getDiaryByIdService = async (diaryId, userId) => {
+  const diary = await Diary.findOne({ _id: diaryId, userId }).lean();
+
+  if (!diary) {
+    throw createHttpError(404, 'Запис не знайдено');
+  }
+
+  return diary;
+};
