@@ -73,8 +73,9 @@ export const deleteDiaryService = async (diaryId, userId) => {
 };
 
 export const getDiaryByIdService = async (diaryId, userId) => {
-  const diary = await Diary.findOne({ _id: diaryId, userId }).lean();
-
+  const diary = await Diary.findOne({ _id: diaryId, userId })
+    .populate('emotions', 'title')
+    .lean();
   if (!diary) {
     throw createHttpError(404, 'Запис не знайдено');
   }
