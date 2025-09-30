@@ -1,17 +1,23 @@
 import createHttpError from 'http-errors';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { updateUser } from '../services/users.js';
+import { calculateCurrentWeekFromUser } from '../utils/calculatePregnancy.js';
 
 export const getCurrentUserController = async (req, res) => {
   const user = req.user;
   if (!user) {
     throw createHttpError(404, 'User not found.');
   }
+  const userObj = user.toObject();
+
+  const currentWeek = calculateCurrentWeekFromUser(userObj);
+  userObj.currentWeek = currentWeek;
+  console.log('111111111111111111111111', userObj);
 
   res.status(200).json({
     status: 200,
     message: 'Successfully found current user.',
-    data: user,
+    data: { userObj },
   });
 };
 

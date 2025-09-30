@@ -1,9 +1,10 @@
 // src/utils/calculatePregnancy.js
-import createHttpError from 'http-errors';
+// import createHttpError from 'http-errors';
+import { calculatePregnancyInfoPublic } from '../services/weekService.js';
 
 export const calculateCurrentWeekFromUser = (user) => {
   if (!user?.dueDate) {
-    throw createHttpError(400, 'Due date not found in user profile');
+    return calculatePregnancyInfoPublic();
   }
 
   const today = new Date();
