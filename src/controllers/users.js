@@ -12,12 +12,11 @@ export const getCurrentUserController = async (req, res) => {
 
   const currentWeek = calculateCurrentWeekFromUser(userObj);
   userObj.currentWeek = currentWeek;
-  console.log('111111111111111111111111', userObj);
 
   res.status(200).json({
     status: 200,
     message: 'Successfully found current user.',
-    data: { userObj },
+    data: { user: userObj },
   });
 };
 
