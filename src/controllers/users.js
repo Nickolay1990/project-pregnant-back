@@ -9,7 +9,7 @@ export const getCurrentUserController = async (req, res) => {
     throw createHttpError(404, 'User not found.');
   }
   const userObj = user.toObject();
-
+  delete userObj.password;
   const currentWeek = calculateCurrentWeekFromUser(userObj);
   userObj.currentWeek = currentWeek;
 
