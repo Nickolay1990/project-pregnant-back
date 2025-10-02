@@ -5,6 +5,7 @@ import { calculateCurrentWeekFromUser } from '../utils/calculatePregnancy.js';
 
 export const getCurrentUserController = async (req, res) => {
   const user = req.user;
+
   if (!user) {
     throw createHttpError(404, 'User not found.');
   }
@@ -38,25 +39,33 @@ export const updateUserAvatarController = async (req, res, next) => {
     photoUrl = await saveFileToCloudinary(photo);
   }
 
-  const result = await updateUser(userId, { photo: photoUrl });
+  const user = await updateUser(userId, { photo: photoUrl });
 
-  if (!result) {
+  if (!user) {
     next(createHttpError(404, 'User not found.'));
     return;
   }
 
+  const userObj = user.toObject();
+  const currentWeek = calculateCurrentWeekFromUser(userObj);
+  userObj.currentWeek = currentWeek;
+
   res.json({
     status: 200,
     message: 'Successfully update avatar user!',
-    data: result,
+    data: { user: userObj },
   });
 };
 
 export const updateUserController = async (req, res, next) => {
   const { userId } = req.params;
-  const result = await updateUser(userId, req.body);
+  const user = await updateUser(userId, req.body);
 
-  if (!result) {
+  const userObj = user.toObject();
+  const currentWeek = calculateCurrentWeekFromUser(userObj);
+  userObj.currentWeek = currentWeek;
+
+  if (!user) {
     next(createHttpError(404, 'User not found'));
     return;
   }
@@ -64,6 +73,6 @@ export const updateUserController = async (req, res, next) => {
   res.json({
     status: 200,
     message: `Successfully update a user!`,
-    data: result,
+    data: { user: userObj },
   });
 };
